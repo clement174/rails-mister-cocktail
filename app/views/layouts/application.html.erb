@@ -12,6 +12,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application' %>
   </head>
+  <div class="navbar-wagon">
+  <!-- Logo -->
+  <%= link_to "List of cocktails", cocktails_path %>
+
+  <!-- Right Navigation -->
+  <div class="navbar-wagon-right hidden-xs hidden-sm">
+    <%= link_to "Add a new cocktail", new_cocktail_path %>
+  </div>
+</div>
 
   <body>
     <%= yield %>

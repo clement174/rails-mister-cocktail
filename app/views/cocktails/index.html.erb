@@ -1,18 +1,25 @@
-<%= link_to "Add a new cocktail", new_cocktail_path %>
+<div class="container">
+  <h1>List of cocktails</h1>
 
-<h1>List of cocktails</h1>
-
-<%= form_tag(cocktails_path, method: :get) do %>
-  <%= text_field_tag :name %>
-  <%= submit_tag 'Search', class: "btn btn-primary" %>
-<% end %>
-
+  <%= form_tag(cocktails_path, method: :get) do %>
+    <%= text_field_tag :name %>
+    <%= submit_tag 'Search', class: "btn btn-primary" %>
+  <% end %>
 
 
-
-
-<% @cocktails.each do |cocktail| %>
-  <div class="cocktail">
-    <h2><%= link_to cocktail.name, cocktail_path(cocktail) %></h2>
+  <div class="container">
+    <div class="row">
+      <% @cocktails.each do |cocktail| %>
+        <div class="col-xs-12 col-sm-4">
+          <%= link_to cocktail_path(cocktail) do %>
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_tag cocktail.photo, height: 100, width: 200, crop: :fill %>');">
+              <div class="card-description">
+                <h2><%= cocktail.name %></h2>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

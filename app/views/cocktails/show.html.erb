@@ -1,46 +1,47 @@
-<%= link_to "List of cocktails", cocktails_path %>
-<h1><%= @cocktail.name %></h1>
+<div class="container">
+  <h1><%= @cocktail.name %></h1>
 
+  <%= cl_image_tag @cocktail.photo, height: 300, width: 200, crop: :fill %>
 
-<%= link_to "add ingredient", new_cocktail_dose_path(@cocktail) %>
-
-<% @cocktail.doses.each do |dose| %>
-  <div class="dose">
-    <p><%= dose.ingredient.name %> <%= dose.description %></p>
-    <%= link_to raw('<i class="far fa-trash-alt"></i>'), dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } %>
+  <div class="doses">
+    <% @cocktail.doses.each do |dose| %>
+      <div class="dose">
+        <p><%= dose.ingredient.name %> <%= dose.description %></p>
+        <%= link_to raw('<i class="far fa-trash-alt"></i>'), dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } %>
+      </div>
+    <% end %>
   </div>
-<% end %>
 
 
-<div class="add-dose">
-  <%= simple_form_for ([@cocktail, @dose]) do |f| %>
-    <%# f.association :ingredient %>
-    <%= select_tag "ingredient",
-        options_from_collection_for_select(
-          @ingredients,
-        :id, :name),
-        class: 'select2' %>
+  <div class="add-dose">
+    <%= simple_form_for ([@cocktail, @dose]) do |f| %>
+      <%= select_tag "ingredient",
+          options_from_collection_for_select(
+            @ingredients,
+          :id, :name),
+          class: 'select2' %>
 
-    <%= f.input :description %>
-    <%= f.submit class: "btn btn-primary" %>
-  <% end %>
-</div>
+      <%= f.input :description %>
+      <%= f.submit class: "btn btn-primary" %>
+    <% end %>
+  </div>
 
-<div class="reviews">
-  <% @cocktail.reviews.each do |review| %>
-    <div class="review-unit">
-      <p><%= review.content %></p>
-      <p><%= review.rating %>/5</p>
-      <%= link_to raw('<i class="far fa-edit"></i>'), edit_cocktail_review_path(@cocktail, review) %>
-      <%= link_to raw('<i class="far fa-trash-alt"></i>'), review_path(review), method: :delete, data: { confirm: "Are you sure?" } %>
-    </div>
-  <% end %>
-</div>
+  <div class="reviews">
+    <% @cocktail.reviews.each do |review| %>
+      <div class="review-unit">
+        <p><%= review.content %></p>
+        <p><%= review.rating %>/5</p>
+        <%= link_to raw('<i class="far fa-edit"></i>'), edit_cocktail_review_path(@cocktail, review) %>
+        <%= link_to raw('<i class="far fa-trash-alt"></i>'), review_path(review), method: :delete, data: { confirm: "Are you sure?" } %>
+      </div>
+    <% end %>
+  </div>
 
-<div class="review">
-  <%= simple_form_for ([@cocktail, @review]) do |f| %>
-    <%= f.input :content %>
-    <%= f.input :rating %>
-    <%= f.submit class: "btn btn-primary" %>
-  <% end %>
+  <div class="review">
+    <%= simple_form_for ([@cocktail, @review]) do |f| %>
+      <%= f.input :content %>
+      <%= f.input :rating %>
+      <%= f.submit class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
