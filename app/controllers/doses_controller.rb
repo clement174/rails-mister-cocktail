@@ -10,10 +10,10 @@ class DosesController < ApplicationController
 
     if params[:dose][:ingredient_id] == ""
       ingredient = Ingredient.new
-    elsif params[:ingredient_id].nil?
+    elsif !params[:dose][:ingredient_id].nil?
       ingredient = Ingredient.find(params[:dose][:ingredient_id])
     else
-      ingredient = Ingredient.find(params[:ingredient_id])
+      ingredient = Ingredient.find(params[:ingredient])
     end
 
     @cocktail = Cocktail.find(params[:cocktail_id])

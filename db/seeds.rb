@@ -8,6 +8,10 @@
 require 'open-uri'
 require 'json'
 
+Cocktail.destroy_all
+Ingredient.destroy_all
+Dose.destroy_all
+
 ingredients_json = open('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list').read
 ingredients = JSON.parse(ingredients_json)
 puts 'start'
@@ -24,10 +28,9 @@ dose_1 = Dose.new(description: "5cl")
 dose_2 = Dose.new(description: "7cl")
 dose_3 = Dose.new(description: "10cl")
 
-ingredient_1 = Ingredient.find(1)
-ingredient_2 = Ingredient.find(2)
-ingredient_3 = Ingredient.find(3)
-
+ingredient_1 = Ingredient.find(490)
+ingredient_2 = Ingredient.find(491)
+ingredient_3 = Ingredient.find(492)
 
 dose_1.ingredient = ingredient_1
 dose_2.ingredient = ingredient_2
@@ -40,5 +43,4 @@ dose_3.cocktail = cocktail_2
 dose_1.save
 dose_2.save
 dose_3.save
-
 
